@@ -1,7 +1,12 @@
-import AppRoutes from "./routes/AppRoutes";
+import Dashboard from "./pages/anggota/Dashboard";
 
 function App() {
-  return <AppRoutes />;
+
+  return (
+    <div>
+      <Dashboard />
+    </div>
+  );
 }
 
 export default App;
