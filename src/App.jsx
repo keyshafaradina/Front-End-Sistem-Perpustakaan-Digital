@@ -1,10 +1,10 @@
-import MainLayout from "./layouts/MainLayout";
+import Dashboard from "./pages/anggota/Dashboard";
 
 function App() {
 
   return (
     <div>
-      <MainLayout />
+      <Dashboard />
     </div>
   );
 }

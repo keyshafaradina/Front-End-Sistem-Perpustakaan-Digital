@@ -19,7 +19,7 @@ function ProfileCard() {
             </div>
             <div className="flex justify-start px-20 ">
                 <Button>Logout</Button>
-            </div>
+            </div> 
         </div>
     );
 }
