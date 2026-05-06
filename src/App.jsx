@@ -10,6 +10,9 @@ import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import ForgotPassword from './pages/auth/ForgotPassword';
 
+//Import halaman anggota
+import Dashboard from './pages/anggota/Dashboard';
+
 function App() {
   return (
     <Router>
@@ -22,8 +25,11 @@ function App() {
         <Route path="/register" element={<Register />} />
         <Route path="/forgot-password" element={<ForgotPassword />} />
 
-        {/* Halaman Dashboard Admin */}
-        <Route path="/admin/dashboard" element={<DashboardAdmin />} />
+        {/* Halaman Admin */}
+        <Route path="/admin/dashboard" element={<Dashboard />} />
+
+        {/* Halaman Anggota */}
+        <Route path="/anggota/dashboard" element={<Dashboard />} />
       </Routes>
     </Router>
   );
