@@ -5,17 +5,7 @@ const ForgotPassword = () => {
     <div className="min-h-screen flex flex-col bg-white font-sans">
       
       {/* HEADER */}
-      <div className="bg-pink-200 px-10 py-5 flex justify-between items-center">
-        
-        <h1 className="text-3xl font-bold">
-          E - Library
-        </h1>
-
-        <p className="text-sm font-bold">
-          Sistem Informasi Perpustakaan Digital
-        </p>
-
-      </div>
+      
 
       {/* CONTENT */}
       <div className="px-20 py-16">
