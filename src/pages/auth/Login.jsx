@@ -1,52 +1,72 @@
-import React from 'react';
+import React from "react";
 
 const Login = () => {
-  const pinkPrimary = "#F8C1D6";
-  const pinkHighlight = "#FF69B4"; 
-
-  const inputStyle = {
-    width: '100%',
-    padding: '12px',
-    marginBottom: '20px',
-    borderRadius: '15px',
-    border: '1px solid #000',
-    fontSize: '14px',
-    textAlign: 'center', 
-    boxSizing: 'border-box'
-  };
-
   return (
-    <div style={{ backgroundColor: 'white', minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
-      {/* Header Pink */}
-      <div style={{ backgroundColor: pinkPrimary, padding: '15px 40px', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h1 style={{ margin: 0, fontSize: '24px', fontWeight: 'bold' }}>E - Library</h1>
-        <span style={{ fontSize: '12px', fontWeight: 'bold' }}>Sistem Informasi Perpustakaan Digital</span>
+    <div className="min-h-screen flex flex-col bg-white font-sans">
+      
+      {/* HEADER */}
+      <div className="bg-pink-200 px-10 py-5 flex justify-between items-center">
+        
+        <h1 className="text-3xl font-bold">
+          Humbang E-Library
+        </h1>
+
+        <p className="text-sm font-bold">
+          Sistem Informasi Perpustakaan Digital
+        </p>
+
       </div>
 
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-        {/* Profile Circle Icon */}
-        <div style={{ width: '100px', height: '100px', backgroundColor: pinkPrimary, borderRadius: '50%', border: '1px solid #000', display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: '30px' }}>
-          <span style={{ fontSize: '50px' }}>👤</span>
+      {/* CONTENT */}
+      <div className="flex-1 flex flex-col justify-center items-center">
+
+        {/* ICON PROFILE */}
+        <div className="w-28 h-28 bg-pink-200 rounded-full border border-black flex justify-center items-center mb-8">
+          <span className="text-6xl">👤</span>
         </div>
 
-        <form style={{ width: '100%', maxWidth: '350px', textAlign: 'center' }}>
-          <div style={{ textAlign: 'left', marginBottom: '5px', marginLeft: '10px', fontSize: '13px' }}>Email / Username</div>
-          <input type="text" style={inputStyle} />
+        {/* FORM */}
+        <form className="w-full max-w-sm text-center">
 
-          <div style={{ textAlign: 'left', marginBottom: '5px', marginLeft: '10px', fontSize: '13px' }}>Password</div>
-          <input type="password" style={inputStyle} />
+          {/* EMAIL */}
+          <div className="text-left text-sm ml-2 mb-1">
+            Email / Username
+          </div>
 
-          {/* Link Forget Password */}
-          <div style={{ marginBottom: '25px' }}>
-            <a href="/forgot-password" style={{ color: pinkHighlight, fontSize: '12px', textDecoration: 'none' }}>
+          <input
+            type="text"
+            className="w-full border border-black rounded-2xl py-3 px-4 text-center mb-5 outline-none"
+          />
+
+          {/* PASSWORD */}
+          <div className="text-left text-sm ml-2 mb-1">
+            Password
+          </div>
+
+          <input
+            type="password"
+            className="w-full border border-black rounded-2xl py-3 px-4 text-center mb-5 outline-none"
+          />
+
+          {/* FORGOT PASSWORD */}
+          <div className="mb-6">
+            <a
+              href="/forgot-password"
+              className="text-pink-500 text-sm hover:underline"
+            >
               Forget password?
             </a>
           </div>
 
-          <button style={{ backgroundColor: pinkPrimary, border: 'none', padding: '10px 40px', borderRadius: '5px', fontWeight: 'bold', cursor: 'pointer', border: '0.5px solid #000' }}>
+          {/* BUTTON LOGIN */}
+          <button
+            className="bg-pink-200 border border-black px-12 py-3 rounded-lg font-bold hover:bg-pink-300 transition"
+          >
             LOGIN
           </button>
+
         </form>
+
       </div>
     </div>
   );
