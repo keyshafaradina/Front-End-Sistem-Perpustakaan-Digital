@@ -2,10 +2,7 @@ import React from "react";
 
 const ForgotPassword = () => {
   return (
-    <div className="min-h-screen flex flex-col bg-white font-sans">
-      
-      {/* HEADER */}
-      
+    <div className="min-h-screen flex flex-col">
 
       {/* CONTENT */}
       <div className="px-20 py-16">

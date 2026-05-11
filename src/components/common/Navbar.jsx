@@ -1,10 +1,11 @@
 import {Menu} from "lucide-react";
 
-function Navbar({onToggle}) {
+function Navbar({ showMenu= true, onToggle}) {
   return (
-    <nav className="bg-pink-300 text-black px-4 md:px-10 py-3 flex flex-wrap items-center justify-between gap-2">
+    <nav className="bg-pink-300 h-16 px-5 flex justify-between items-center gap-4 shadow fixed top-0 left-0 right-0 z-50">
         <div className="flex items-center gap-3">
-        <button onClick={onToggle}><Menu size={30} className="text-black font-bold"/></button>
+        {showMenu && (
+          <button onClick={onToggle}><Menu size={30} className="text-black font-bold hover:bg-pink-400"/></button>)}
         <h1 className="text-lg md:text-3xl font-bold">
             Humbang E-Library
         </h1>

@@ -1,7 +1,7 @@
 export default function Button({children, onClick, type="button"}) {
     return (
-            <button type={type} onClick={onClick} className=" bg-pink-300 hover:bg-pink-200 text-black text-xl font-bold py-2 px-20 rounded-lg">
+            <button type={type} onClick={onClick} className=" bg-pink-300 hover:bg-pink-200 text-black text-xl px-10 py-1 font-bold rounded-xl">
                 {children}
             </button>
     );
-}`  `
+}

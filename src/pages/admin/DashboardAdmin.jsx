@@ -3,19 +3,7 @@ import React from "react";
 const DashboardAdmin = () => {
   return (
     <div className="min-h-screen bg-gray-100 font-sans">
-      
-      {/* HEADER */}
-      <div className="bg-pink-200 px-10 py-6 pb-12">
-        
-        {/* BAGIAN ATAS */}
-        <div className="flex justify-between items-center">
-
-          <p className="text-2xl font-bold">
-            Sistem Informasi Perpustakaan Digital
-          </p>
-
-        </div>
-
+      <div>
         {/* JUDUL TENGAH */}
         <h2 className="text-center text-4xl font-bold mt-10">
           Dinas Perpustakaan dan Arsip Daerah
