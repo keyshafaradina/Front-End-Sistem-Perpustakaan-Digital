@@ -1,5 +1,6 @@
 export default function KotakInput({
     label,
+    type,
     name,
     value,
     onChange,
@@ -7,16 +8,16 @@ export default function KotakInput({
     disabled=false
 }) {
     return(
-        <div>
+        <div className="flex flex-col w-full text-xl">
             <label>{label}</label>
-            <input
-            type="text"
+            <input 
+            type={type}
             name={name}
             value={value}
             onChange={onChange}
             placeholder={placeholder}
             disabled={disabled}
-            className="w-full border border-black rounded-lg px-20 py-1 focus:outline-none focus:ring-pink-400 disabled:bg-pink-100"
+            className="py-1 border border-black rounded-xl focus:outline-none focus:ring-pink-400 disabled:bg-pink-100"
             />
         </div>
     );

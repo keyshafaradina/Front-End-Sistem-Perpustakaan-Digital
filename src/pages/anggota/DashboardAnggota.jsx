@@ -1,10 +1,7 @@
-import MainLayout from "../../layouts/MainLayout";
-
-
-export default function Dashboard () {
+export default function DashboardAnggota () {
   return(
-    <div><MainLayout />
-    <div className="font-bold w-full text-center text-2xl py-6 bg-pink-200"><h1>Dinas Perpustakaan dan Arsip Daerah</h1></div>
+    <div>
+    <div className="font-bold w-full text-center text-2xl py-7 bg-pink-200"><h1>Dinas Perpustakaan dan Arsip Daerah</h1></div>
     <div className="flex justify-center items-center gap-7 p-20">
       <img src="/images/logoperpus.png" alt="logo" className="w-80 h-80"/>
       <div className="flex flex-col gap-4">
