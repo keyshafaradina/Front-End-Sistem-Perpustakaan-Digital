@@ -12,6 +12,9 @@ import ForgotPassword from "../pages/auth/ForgotPassword";
 
 //import halaman admin
 import DashboardAdmin from "../pages/admin/DashboardAdmin";
+import ProfileAdmin from "../pages/admin/ProfileAdmin";
+import Buku from "../pages/admin/Buku";
+import Laporan from "../pages/admin/laporan/Laporan";
 
 //import halaman anggota
 import DashboardAnggota from "../pages/anggota/DashboardAnggota";
@@ -29,6 +32,10 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
           {/* Halaman Admin */}
           <Route path="/dashboardadmin" element={<ProtectedRoute><DashboardAdmin /></ProtectedRoute>} />
+          <Route path="/profileadmin" element={<ProtectedRoute><ProfileAdmin /></ProtectedRoute>} />
+          <Route path="buku" element={<ProtectedRoute><Buku /></ProtectedRoute>} />
+          <Route path="/laporan" element={<ProtectedRoute><Laporan /></ProtectedRoute>}/>
+
 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<ProtectedRoute><DashboardAnggota /></ProtectedRoute>} />

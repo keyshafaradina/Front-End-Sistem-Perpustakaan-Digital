@@ -1,64 +1,24 @@
-import React from "react";
-
-const DashboardAdmin = () => {
+export default function DashboardAdmin() {
   return (
-    <div className="min-h-screen bg-gray-100 font-sans">
-      <div>
-        {/* JUDUL TENGAH */}
-        <h2 className="text-center text-4xl font-bold mt-10">
-          Dinas Perpustakaan dan Arsip Daerah
-        </h2>
+    <div className="bg-white shadow rounded p-6 text-center">
+      
+      <h2 className="font-semibold bg-pink-200 h-16 px-4 flex justify-center items-center gap-4 shadow fixed top-12 left-0 right-0 z-50"> 
+        Dinas Perpustakaan dan Arsip Daerah
+      </h2>
 
+      <p className="mt-12 font-bold text-center">Selamat datang, Admin!</p>
+      <p className="font-bold text-center">Kelola perpustakaan dengan mudah hari ini!</p>
+
+      <div className="flex justify-center gap-4 mt-6 py-3">
+        <div className="bg-pink-200 px-4 py-2 rounded">500 Buku</div>
+        <div className="bg-pink-200 px-4 py-2 rounded">350 Anggota</div>
+        <div className="bg-pink-200 px-4 py-2 rounded">120 Dipinjam</div>
       </div>
 
-      {/* CONTENT */}
-      <div className="px-20 py-16">
+      <button className="mt-6 bg-pink-300 px-4 py-2 rounded">
+        Edit tampilan dashboard utama
+      </button>
 
-        {/* WELCOME TEXT */}
-        <div className="mb-16">
-          
-          <h1 className="text-5xl font-bold mb-3">
-            Selamat datang, Admin!
-          </h1>
-
-          <h2 className="text-3xl font-semibold">
-            Kelola perpustakaan dengan mudah hari ini!
-          </h2>
-
-        </div>
-
-        {/* CARD */}
-        <div className="flex justify-center gap-14 mb-20">
-
-          {/* CARD 1 */}
-          <div className="bg-pink-200 px-14 py-8 rounded-xl text-3xl font-bold min-w-[230px] text-center">
-            500 Buku
-          </div>
-
-          {/* CARD 2 */}
-          <div className="bg-pink-200 px-14 py-8 rounded-xl text-3xl font-bold min-w-[230px] text-center">
-            350 Anggota
-          </div>
-
-          {/* CARD 3 */}
-          <div className="bg-pink-200 px-14 py-8 rounded-xl text-3xl font-bold min-w-[230px] text-center">
-            120 Dipinjam
-          </div>
-
-        </div>
-
-        {/* BUTTON */}
-        <div className="flex justify-center">
-          
-          <button className="bg-pink-200 px-20 py-5 rounded-xl text-3xl font-bold hover:bg-pink-300 transition">
-            Edit tampilan dashboard utama
-          </button>
-
-        </div>
-
-      </div>
     </div>
   );
-};
-
-export default DashboardAdmin;
+}
