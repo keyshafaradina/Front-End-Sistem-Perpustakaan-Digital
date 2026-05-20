@@ -8,8 +8,8 @@ export default function MainLayout() {
     const [showSidebar, setShowSidebar]=useState(false);
 
     //role login
-    // const role="ADMIN";
-    const role="ANGGOTA";
+    const role="ADMIN";
+    // const role="ANGGOTA";
 
     return (
         <div>

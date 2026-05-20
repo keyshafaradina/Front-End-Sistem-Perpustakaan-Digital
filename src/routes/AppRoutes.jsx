@@ -51,17 +51,17 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
         <Route element={<ProtectedRoute />}>
           {/* Halaman Admin */}
-          <Route path="/dashboardadmin" element={<ProtectedRoute><DashboardAdmin /></ProtectedRoute>} />
-          <Route path="/profileadmin" element={<ProtectedRoute><ProfileAdmin /></ProtectedRoute>} />
-          <Route path="/buku" element={<ProtectedRoute><Buku /></ProtectedRoute>} />
-          <Route path="/laporan" element={<ProtectedRoute><Laporan /></ProtectedRoute>} />  
-          <Route path="/anggota" element={<ProtectedRoute><Anggota /></ProtectedRoute>} />
-          <Route path="/kelolabuku" element={<ProtectedRoute><KelolaBuku /></ProtectedRoute>} />
-          <Route path="/tambah-buku" element={<ProtectedRoute><TambahBuku /></ProtectedRoute>} />
-          <Route path="/edit-buku/:id" element={<ProtectedRoute><EditBuku /></ProtectedRoute>} />
-          <Route path="/peringatan" element={<ProtectedRoute><Peringatan /></ProtectedRoute>} />
-          <Route path="/terlambat" element={<ProtectedRoute><Terlambat /></ProtectedRoute>} />
-          <Route path="/editprofileadmin" element={<ProtectedRoute><EditProfileAdmin /></ProtectedRoute>} />
+          <Route path="/dashboardadmin" element={<DashboardAdmin />} />
+          <Route path="/profileadmin" element={<ProfileAdmin />} />
+          <Route path="/buku" element={<Buku />} />
+          <Route path="/laporan" element={<Laporan />} />  
+          <Route path="/anggota" element={<Anggota />} />
+          <Route path="/kelolabuku" element={<KelolaBuku />} />
+          <Route path="/tambah-buku" element={<TambahBuku />} />
+          <Route path="/edit-buku/:id" element={<EditBuku />} />
+          <Route path="/peringatan" element={<Peringatan />} />
+          <Route path="/terlambat" element={<Terlambat />} />
+          <Route path="/editprofileadmin" element={<EditProfileAdmin />} />
 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<DashboardAnggota />} />
