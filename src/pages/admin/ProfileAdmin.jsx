@@ -1,61 +1,35 @@
-export default function ProfileAdmin() {
-  return (
-    <div className="bg-white shadow rounded p-6">
-      
-      <h2 className="font-bold text-2xl">Profil</h2>
+import Button from "../../components/ui/Button";
+import KotakInput from "../../components/ui/KotakInput";
+import { Link, useLocation } from "react-router-dom";
 
-      <div className="flex gap-6">
-
-
-        <div className="flex flex-col items-center">
-          <img
-            src="/images/foto admin.jpeg"
-            alt="admin"
-            className="w-48 h-48 object-cover border mt-3"
-          />
-
-          <button className="mr-auto bg-pink-300 px-4 py-1 mt-20 rounded">
-            Logout
-          </button>
+function ProfileAdmin() {
+    const location=useLocation();
+    const profile = location.state || {
+    nama: "adadeh",
+    email: "adadeh@gmail.com",
+    alamat: "Medan",
+    telepon: "08123456789",
+};
+    return (
+        <div className="flex flex-col gap-5 mb-5">
+            <div><h1 className="font-bold text-4xl px-10 py-4">Profile</h1></div>
+            <div className="flex flex-col lg:flex-row gap-20 px-20 justify-start">
+                <img src="/images/nailong.jpg" alt="foto profil" className="w-50 h-50 lg:w-80 lg:h-96 object-cover"/>
+                <div className="font-semibold text-2xl w-full">
+                    <KotakInput label="Nama" value={profile.nama} direction="column"/>
+                    <KotakInput label="Email" value={profile.email} direction="column"/>
+                    <KotakInput label="Alamat" value={profile.alamat} direction="column"/>
+                    <KotakInput label="No. Telepon" value={profile.telepon} direction="column"/>
+                </div>
+            </div>
+            <div className="flex justify-end px-20 ">
+                <Link to="/editprofileadmin"><Button>Edit Profil</Button></Link>
+            </div>
+            <div className="flex justify-start px-20">
+                <Link to="/"><Button>Logout</Button></Link>
+            </div>
         </div>
-
-        {/*FORM */}
-        <div className="flex-1 space-y-3">
-
-          <div>
-            <label className="text-sm">Nama</label>
-            <input type="text" defaultValue="Budi Santoso"
-              className="w-full border rounded-lg px-3 py-1"/>
-          </div>
-
-          <div>
-            <label className="text-sm">Email</label>
-            <input type="text" defaultValue="perpus@gmail.com"
-              className="w-full border rounded-lg px-3 py-1" />
-          </div>
-
-          <div>
-            <label className="text-sm">Alamat</label>
-            <input type="text" defaultValue="Jauh di sana"
-              className="w-full border rounded-lg px-3 py-1" />
-          </div>
-
-          <div>
-            <label className="text-sm">Jabatan</label>
-            <input type="text"defaultValue="Pustakawan"
-              className="w-full border rounded-lg px-3 py-1" />
-          </div>
-
-          {/* BUTTON */}
-          <div className="flex justify-end mt-4">
-            <button className="bg-pink-300 px-3 py-1 mt rounded">
-              Edit Profil
-            </button>
-          </div>
-
-        </div>
-      </div>
-
-    </div>
-  );
+    );
 }
+
+export default ProfileAdmin;

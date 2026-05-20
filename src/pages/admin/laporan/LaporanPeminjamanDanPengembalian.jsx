@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Button from "../../../components/ui/Button";
 
 export default function LaporanPeminjamanDanPengembalian() {
   const [show, setShow] = useState(false);
@@ -6,12 +7,11 @@ export default function LaporanPeminjamanDanPengembalian() {
   return (
     <div className="bg-white p-6 rounded-xl shadow-md">
 
-      <h2 className="text-xl font-semibold mb-6">
+      <h2 className="text-2xl font-semibold mb-6">
         Laporan Peminjaman & Pengembalian
       </h2>
 
-      {/* FILTER TANGGAL LENGKAP */}
-      <div className="border rounded-lg p-6 mb-10">
+      <div className="border rounded-lg p-6 mb-10 relative overflow-visible">
 
         <div className="grid grid-cols-3 gap-4">
 
@@ -48,36 +48,31 @@ export default function LaporanPeminjamanDanPengembalian() {
           <div>
             <label className="text-lg block mb-1">Tahun</label>
             <select className="w-full border rounded px-3 py-2">
-              <option>2024</option>
-              <option>2025</option>
-              <option>2026</option>
+              {Array.from({ length: 5 }, (_, i) => {
+                const year = new Date().getFullYear() + i;
+                return <option key={year}>{year}</option>;
+              })}
             </select>
           </div>
 
         </div>
 
         <div className="flex justify-end mt-6">
-          <button
-            onClick={() => setShow(!show)}
-            className="bg-pink-300 hover:bg-pink-400 px-5 py-2 rounded-lg text-lg"
-          >
-            Tampilkan Data
-          </button>
+            <Button onClick={() => setShow(true)}>Tampilkan Data</Button>
         </div>
 
       </div>
 
-      {/* TABLE */}
       {show && (
         <div className="overflow-x-auto border rounded-lg">
           <table className="w-full text-lg">
 
             <thead className="bg-pink-200 text-left">
               <tr>
-                <th className="p-3">Nama</th>
-                <th className="p-3">Tgl Pinjam</th>
-                <th className="p-3">Tgl Kembali</th>
-                <th className="p-3">Buku</th>
+                <th className="p-3 w-1/5">Nama</th>
+                <th className="p-3 w-1/4">Tgl Pinjam</th>
+                <th className="p-3 w-1/4">Tgl Kembali</th>
+                <th className="p-3 w-1/4">Buku</th>
                 <th className="p-3">Status</th>
               </tr>
             </thead>
@@ -103,7 +98,7 @@ export default function LaporanPeminjamanDanPengembalian() {
                 </td>
               </tr>
 
-              <tr className="border-t hover:bg-gray-50">
+               <tr className="border-t hover:bg-gray-50">
                 <td className="p-3">Keysha</td>
                 <td className="p-3">7 Maret 2026</td>
                 <td className="p-3">-</td>
@@ -113,7 +108,7 @@ export default function LaporanPeminjamanDanPengembalian() {
                 </td>
               </tr>
 
-               <tr className="border-t hover:bg-gray-50">
+                 <tr className="border-t hover:bg-gray-50">
                 <td className="p-3">Chelsea</td>
                 <td className="p-3">7 Maret 2026</td>
                 <td className="p-3">10 Maret 2026</td>
@@ -122,13 +117,11 @@ export default function LaporanPeminjamanDanPengembalian() {
                   Dikembalikan
                 </td>
               </tr>
-
             </tbody>
 
           </table>
         </div>
       )}
-
     </div>
   );
 }

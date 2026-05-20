@@ -5,20 +5,27 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
-//import halaman auth
+// auth
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 import VerifikasiEmail from "../pages/auth/VerifikasiEmail";
 import ResetPassword from "../pages/auth/ResetPassword";
 
-//import halaman admin
+// admin
 import DashboardAdmin from "../pages/admin/DashboardAdmin";
 import ProfileAdmin from "../pages/admin/ProfileAdmin";
-import Buku from "../pages/admin/Buku";
+import Buku from "../pages/admin/BukuPopuler";
 import Laporan from "../pages/admin/laporan/Laporan";
+import Anggota from "../pages/admin/Anggota";
+import KelolaBuku from "../pages/admin/KelolaBuku";
+import TambahBuku from "../pages/admin/TambahBuku";
+import EditBuku from "../pages/admin/EditBuku";
+import Peringatan from "../pages/admin/Peringatan";
+import Terlambat from "../pages/admin/Terlambat";
+import EditProfileAdmin from "../pages/admin/EditProfileAdmin";
 
-//import halaman anggota
+// anggota
 import DashboardAnggota from "../pages/anggota/DashboardAnggota";
 import ProfileAnggota from "../pages/anggota/profile/ProfileAnggota";
 import EditProfileAnggota from "../pages/anggota/profile/EditProfileAnggota";
@@ -27,6 +34,7 @@ import AjukanPerpanjangan from "../pages/anggota/riwayatpeminjaman/AjukanPerpanj
 import KartuAnggota from "../pages/anggota/KartuAnggota";
 import DaftarBuku from "../pages/anggota/daftarbuku/DaftarBuku";
 import InformasiBuku from "../pages/anggota/daftarbuku/InformasiBuku";
+
 
 function AppRoutes() {
   return (
@@ -43,11 +51,17 @@ function AppRoutes() {
         <Route element={<MainLayout />}>
         <Route element={<ProtectedRoute />}>
           {/* Halaman Admin */}
-          <Route path="/dashboardadmin" element={<DashboardAdmin />}/>
-          <Route path="/profileadmin" element={<ProfileAdmin />} />
-          <Route path="/buku" element={<Buku />} />
-          <Route path="/laporan" element={<Laporan />}/>
-
+          <Route path="/dashboardadmin" element={<ProtectedRoute><DashboardAdmin /></ProtectedRoute>} />
+          <Route path="/profileadmin" element={<ProtectedRoute><ProfileAdmin /></ProtectedRoute>} />
+          <Route path="/buku" element={<ProtectedRoute><Buku /></ProtectedRoute>} />
+          <Route path="/laporan" element={<ProtectedRoute><Laporan /></ProtectedRoute>} />  
+          <Route path="/anggota" element={<ProtectedRoute><Anggota /></ProtectedRoute>} />
+          <Route path="/kelolabuku" element={<ProtectedRoute><KelolaBuku /></ProtectedRoute>} />
+          <Route path="/tambah-buku" element={<ProtectedRoute><TambahBuku /></ProtectedRoute>} />
+          <Route path="/edit-buku/:id" element={<ProtectedRoute><EditBuku /></ProtectedRoute>} />
+          <Route path="/peringatan" element={<ProtectedRoute><Peringatan /></ProtectedRoute>} />
+          <Route path="/terlambat" element={<ProtectedRoute><Terlambat /></ProtectedRoute>} />
+          <Route path="/editprofileadmin" element={<ProtectedRoute><EditProfileAdmin /></ProtectedRoute>} />
 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<DashboardAnggota />} />
