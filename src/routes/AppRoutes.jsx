@@ -5,43 +5,63 @@ import MainLayout from "../layouts/MainLayout";
 import AuthLayout from "../layouts/AuthLayout";
 import ProtectedRoute from "./ProtectedRoute";
 
-//import halaman auth
+// auth
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
 
-//import halaman admin
+// admin
 import DashboardAdmin from "../pages/admin/DashboardAdmin";
 import ProfileAdmin from "../pages/admin/ProfileAdmin";
-import Buku from "../pages/admin/Buku";
+import Buku from "../pages/admin/BukuPopuler";
 import Laporan from "../pages/admin/laporan/Laporan";
+import Anggota from "../pages/admin/Anggota";
+import KelolaBuku from "../pages/admin/KelolaBuku";
+import TambahBuku from "../pages/admin/TambahBuku";
+import EditBuku from "../pages/admin/EditBuku";
+import Peringatan from "../pages/admin/Peringatan";
+import Terlambat from "../pages/admin/Terlambat";
+import EditProfileAdmin from "../pages/admin/EditProfileAdmin";
 
-//import halaman anggota
+// anggota
 import DashboardAnggota from "../pages/anggota/DashboardAnggota";
+
 
 function AppRoutes() {
   return (
-      <Routes>
-        <Route element={<AuthLayout />}>
-          {/* Halaman Auth lainnya */}
-          <Route path="/" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />  
-        </Route>
+    <Routes>
 
-        <Route element={<MainLayout />}>
-          {/* Halaman Admin */}
-          <Route path="/dashboardadmin" element={<ProtectedRoute><DashboardAdmin /></ProtectedRoute>} />
-          <Route path="/profileadmin" element={<ProtectedRoute><ProfileAdmin /></ProtectedRoute>} />
-          <Route path="buku" element={<ProtectedRoute><Buku /></ProtectedRoute>} />
-          <Route path="/laporan" element={<ProtectedRoute><Laporan /></ProtectedRoute>}/>
+      {/* AUTH */}
+      <Route element={<AuthLayout />}>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+      </Route>
+
+      {/* MAIN */}
+      <Route element={<MainLayout />}>
+
+        {/* ADMIN */}
+        <Route path="/dashboardadmin" element={<ProtectedRoute><DashboardAdmin /></ProtectedRoute>} />
+        <Route path="/profileadmin" element={<ProtectedRoute><ProfileAdmin /></ProtectedRoute>} />
+        <Route path="/buku" element={<ProtectedRoute><Buku /></ProtectedRoute>} />
+        <Route path="/laporan" element={<ProtectedRoute><Laporan /></ProtectedRoute>} />  
+        <Route path="/anggota" element={<ProtectedRoute><Anggota /></ProtectedRoute>} />
+        <Route path="/kelolabuku" element={<ProtectedRoute><KelolaBuku /></ProtectedRoute>} />
+        <Route path="/tambah-buku" element={<ProtectedRoute><TambahBuku /></ProtectedRoute>} />
+        <Route path="/edit-buku/:id" element={<ProtectedRoute><EditBuku /></ProtectedRoute>} />
+        <Route path="/peringatan" element={<ProtectedRoute><Peringatan /></ProtectedRoute>} />
+        <Route path="/terlambat" element={<ProtectedRoute><Terlambat /></ProtectedRoute>} />
+       <Route path="/editprofileadmin" element={<ProtectedRoute><EditProfileAdmin /></ProtectedRoute>} />
 
 
-          {/* Halaman Anggota */}
-          <Route path="/dashboardanggota" element={<ProtectedRoute><DashboardAnggota /></ProtectedRoute>} />
-        </Route>
-      </Routes>
+        {/* ANGGOTA */}
+        <Route path="/dashboardanggota" element={<ProtectedRoute><DashboardAnggota /></ProtectedRoute>} />
+
+      </Route>
+
+    </Routes>
   );
 }
 
-export default AppRoutes
+export default AppRoutes;
