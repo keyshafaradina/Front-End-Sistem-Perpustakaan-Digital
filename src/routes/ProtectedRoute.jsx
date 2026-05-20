@@ -1,13 +1,12 @@
-import { Navigate } from "react-router-dom";
+import { Navigate, Outlet } from "react-router-dom";
 
-export default function ProtectedRoute({
-  children,
-}) {
+export default function ProtectedRoute(
+) {
   const isLogin = true;
 
   if (!isLogin) {
     return <Navigate to="/" />;
   }
 
-  return children;
+  return <Outlet />;
 }

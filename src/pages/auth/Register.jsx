@@ -1,9 +1,80 @@
-import React from "react";
+import React, { useState } from "react";
+import { useNavigate, Link } from "react-router-dom";
+
+import Button from "../../components/ui/Button";
+import KotakInput from "../../components/ui/KotakInput";
+import PopUp from "../../components/ui/Popup";
 
 const Register = () => {
+  const navigate = useNavigate();
+
+  const [showPopup, setShowPopup] = useState(false);
+
+  const [popupData, setPopupData] = useState({
+    title: "",
+    message: "",
+  });
+
+  const [form, setForm] = useState({
+    nama: "",
+    tanggalLahir: "",
+    alamat: "",
+    email: "",
+    telepon: "",
+    username: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setForm({
+      ...form,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleRegister = (e) => {
+    e.preventDefault();
+
+    // VALIDASI INPUT
+    if (
+      !form.nama ||
+      !form.tanggalLahir ||
+      !form.alamat ||
+      !form.email ||
+      !form.telepon ||
+      !form.username ||
+      !form.password
+    ) {
+      setPopupData({
+        title: "Peringatan",
+        message: "Silahkan lengkapi data diri!",
+      });
+
+      setShowPopup(true);
+      return;
+    }
+
+    // BERHASIL
+    setPopupData({
+      title: "Berhasil",
+      message: "Silahkan lakukan login.",
+    });
+
+    setShowPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setShowPopup(false);
+
+    // pindah ke login kalau berhasil
+    if (popupData.title === "Berhasil") {
+      navigate("/login");
+    }
+  };
+
   return (
-    <div className="min-h-screen flex justify-center items-center bg-white px-5 font-sans">
-      
+    <div className="min-h-screen mt-10 flex justify-center items-center bg-white px-5 font-sans">
+
       {/* CONTAINER */}
       <div className="w-full max-w-md text-center">
 
@@ -17,74 +88,109 @@ const Register = () => {
         </p>
 
         {/* FORM */}
-        <form>
+        <form
+          onSubmit={handleRegister}
+          className="flex flex-col gap-4"
+        >
 
-          {/* INPUT */}
-          <input
+          <KotakInput
             type="text"
+            name="nama"
             placeholder="Nama Lengkap"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.nama}
+            onChange={handleChange}
           />
 
-          <input
+          <KotakInput
             type="text"
+            name="tanggalLahir"
             placeholder="Tanggal Lahir"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.tanggalLahir}
+            onChange={handleChange}
           />
 
-          <input
+          <KotakInput
             type="text"
+            name="alamat"
             placeholder="Alamat"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.alamat}
+            onChange={handleChange}
           />
 
-          <input
+          <KotakInput
             type="email"
+            name="email"
             placeholder="Email"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.email}
+            onChange={handleChange}
           />
 
-          <input
+          <KotakInput
             type="tel"
+            name="telepon"
             placeholder="No telepon"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.telepon}
+            onChange={handleChange}
           />
 
-          <input
+          <KotakInput
             type="text"
+            name="username"
             placeholder="Username"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.username}
+            onChange={handleChange}
           />
 
-          <input
+          <KotakInput
             type="password"
+            name="password"
             placeholder="Password"
-            className="w-full border border-gray-300 rounded-xl px-4 py-3 mb-4 outline-none"
+            value={form.password}
+            onChange={handleChange}
           />
 
           {/* LOGIN LINK */}
-          <div className="text-right mb-6">
+          <div className="text-right">
             <span className="text-xs text-pink-300">
               Sudah memiliki akun?{" "}
-              <a
-                href="/login"
+              <Link
+                to="/login"
                 className="font-bold hover:underline"
               >
                 Login disini
-              </a>
+              </Link>
             </span>
           </div>
 
           {/* BUTTON */}
-          <button
-            type="submit"
-            className="bg-pink-200 text-white font-bold px-12 py-3 rounded-xl hover:bg-pink-300 transition"
-          >
+          <Button type="submit">
             Daftar
-          </button>
+          </Button>
 
         </form>
       </div>
+      <PopUp
+        isOpen={showPopup}
+        onClose={handleClosePopup}
+      >
+        <h1 className="text-lg font-bold mb-3">
+          {popupData.title}
+        </h1>
+
+        <p className="mb-5 text-center">
+          {popupData.message}
+        </p>
+
+        <div className="flex justify-center">
+          <button
+            onClick={handleClosePopup}
+            className="font-bold bg-pink-300 hover:bg-pink-100 px-5 py-2 rounded-lg"
+          >
+            OK
+          </button>
+        </div>
+      </PopUp>
+
     </div>
   );
 };

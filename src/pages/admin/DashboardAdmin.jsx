@@ -2,7 +2,7 @@ export default function DashboardAdmin() {
   return (
     <div className="bg-white shadow rounded p-6 text-center">
       
-      <h2 className="font-semibold bg-pink-200 h-16 px-4 flex justify-center items-center gap-4 shadow fixed top-12 left-0 right-0 z-50"> 
+      <h2 className="font-semibold bg-pink-200 h-16 px-4 flex justify-center items-center gap-4 shadow z-50"> 
         Dinas Perpustakaan dan Arsip Daerah
       </h2>
 
