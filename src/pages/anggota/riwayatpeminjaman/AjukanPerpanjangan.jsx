@@ -1,5 +1,5 @@
 import { useState } from "react";
-import PopUp from "../../../components/ui/PopUp";
+import PopUp from "../../../components/ui/Popup";
 import { useLocation , useNavigate } from "react-router-dom";
 import KotakInput from "../../../components/ui/KotakInput";
 import Button from "../../../components/ui/Button";

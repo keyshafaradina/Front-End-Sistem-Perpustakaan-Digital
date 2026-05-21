@@ -7,8 +7,9 @@ const menuByRole = {
     { name: "Kelola Buku", path: "/kelolabuku" },
     { name: "Riwayat Buku", path: "/riwayatbuku" },
     { name: "Peminjaman Buku", path: "/admin/peminjaman-buku" },
-    { name: "Pengembalian Buku", path: "/admin/pengembalian-buku" },
+    { name: "Pengembalian Buku", path: "/pengembalian" },
     { name: "Laporan Perpustakaan", path: "/laporan" },
+    
   ],
 
   ANGGOTA: [

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../../components/ui/Button";
 import KotakInput from "../../components/ui/KotakInput";
-import PopUp from "../../components/ui/PopUp"
+import PopUp from "../../components/ui/Popup";
 
 function EditProfileAdmin() {
     const navigate=useNavigate();
