@@ -35,7 +35,7 @@ const ForgotPassword = () => {
       return;
     }
 
-    navigate("/verifikasi-email");
+    navigate("/reset-password");
   };
 
   return (
