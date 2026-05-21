@@ -9,7 +9,6 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
-import VerifikasiEmail from "../pages/auth/VerifikasiEmail";
 import ResetPassword from "../pages/auth/ResetPassword";
 
 // admin
@@ -51,7 +50,6 @@ function AppRoutes() {
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} /> 
-          <Route path="/verifikasi-email" element={<VerifikasiEmail />} />
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
