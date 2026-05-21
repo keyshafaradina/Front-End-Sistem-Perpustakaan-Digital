@@ -5,7 +5,7 @@ export default function LaporanPeminjamanDanPengembalian() {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow-md">
+    <div className="bg-white p-6 rounded-xl">
 
       <h2 className="text-2xl font-semibold mb-6">
         Laporan Peminjaman & Pengembalian

@@ -4,11 +4,12 @@ import { NavLink } from "react-router-dom";
 const menuByRole = {
   ADMIN: [
     { name: "Dashboard", path: "/dashboardadmin" },
-    { name: "Buku", path: "/buku" },
-    { name: "Laporan", path: "/laporan" },
+    { name: "Kelola Buku", path: "/kelolabuku" },
+    { name: "Riwayat Buku", path: "/riwayatbuku" },
     { name: "Peminjaman Buku", path: "/admin/peminjaman-buku" },
-    { name: "Pengembalian Buku", path: "/admin/pengembalian-buku" },
+    { name: "Pengembalian Buku", path: "/pengembalian" },
     { name: "Laporan Perpustakaan", path: "/laporan" },
+    
   ],
 
   ANGGOTA: [
