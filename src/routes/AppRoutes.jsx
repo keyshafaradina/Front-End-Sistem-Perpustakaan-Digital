@@ -24,6 +24,9 @@ import EditBuku from "../pages/admin/EditBuku";
 import Peringatan from "../pages/admin/Peringatan";
 import Terlambat from "../pages/admin/Terlambat";
 import EditProfileAdmin from "../pages/admin/EditProfileAdmin";
+import RiwayatBuku from "../pages/admin/riwayatbuku/RiwayatBuku";
+import Diarsipkan from "../pages/admin/riwayatbuku/Diarsipkan";
+import Dihapus from "../pages/admin/riwayatbuku/Dihapus";
 
 // anggota
 import DashboardAnggota from "../pages/anggota/DashboardAnggota";
@@ -62,7 +65,10 @@ function AppRoutes() {
           <Route path="/peringatan" element={<Peringatan />} />
           <Route path="/terlambat" element={<Terlambat />} />
           <Route path="/editprofileadmin" element={<EditProfileAdmin />} />
-
+          <Route path="/riwayatbuku" element={<RiwayatBuku />} />
+          <Route path="/dihapus" element={<Dihapus />} />
+          <Route path="/diarsipkan" element={<Diarsipkan />} />
+ 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<DashboardAnggota />} />
           <Route path="/profileanggota" element={<ProfileAnggota />} />
