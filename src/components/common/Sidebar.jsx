@@ -6,7 +6,7 @@ const menuByRole = {
     { name: "Dashboard", path: "/dashboardadmin" },
     { name: "Kelola Buku", path: "/kelolabuku" },
     { name: "Riwayat Buku", path: "/riwayatbuku" },
-    { name: "Peminjaman Buku", path: "/admin/peminjaman-buku" },
+    { name: "Peminjaman Buku", path: "/peminjaman" },
     { name: "Pengembalian Buku", path: "/pengembalian" },
     { name: "Laporan Perpustakaan", path: "/laporan" },
     
