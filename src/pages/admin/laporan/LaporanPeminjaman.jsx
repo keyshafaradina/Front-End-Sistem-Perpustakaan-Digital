@@ -1,18 +1,17 @@
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
 
-export default function LaporanKunjungan() {
+export default function LaporanPeminjaman() {
   const [show, setShow] = useState(false);
 
   return (
     <div className="bg-white p-6 rounded-xl">
 
       <h2 className="text-2xl font-semibold mb-6">
-        Laporan Kunjungan
+        Laporan Peminjaman
       </h2>
 
-      {/* FILTER */}
-      <div className="border rounded-lg p-6 mb-10 ">
+      <div className="border rounded-lg p-6 mb-10">
 
         <div className="grid grid-cols-3 gap-4">
 
@@ -58,7 +57,7 @@ export default function LaporanKunjungan() {
 
         </div>
 
-        <div className="flex justify-end mt-7">
+        <div className="flex justify-end mt-6">
           <Button onClick={() => setShow(true)}>Tampilkan Data</Button>
         </div>
 
@@ -68,42 +67,28 @@ export default function LaporanKunjungan() {
         <div className="overflow-x-auto border rounded-lg">
           <table className="w-full text-lg">
 
-            <thead className="bg-pink-200">
+            <thead className="bg-pink-200 text-left">
               <tr>
-                <th className="p-3 text-left w-1/4">Nama</th>
-                <th className="p-3 text-left w-1/4">Nomor Anggota</th>
-                <th className="p-3 text-left w-1/4">Tanggal</th>
-                <th className="p-3 text-left w-1/2">Jam</th>
+                <th className="p-3">Nama</th>
+                <th className="p-3">Tgl Pinjam</th>
+                <th className="p-3">Buku</th>
+                <th className="p-3">Status</th>
               </tr>
             </thead>
 
             <tbody>
               <tr className="border-t hover:bg-gray-50">
-                <td className="p-3">Belqis Nabilah</td>
-                <td className="p-3">AGT005</td>
-                <td className="p-3">02 Maret 2026</td>
-                <td className="p-3">10:00</td>
+                <td className="p-3">Dika</td>
+                <td className="p-3">28 Maret 2026</td>
+                <td className="p-3">Tips Skripsi</td>
+                <td className="p-3 text-yellow-600 font-medium">Dipinjam</td>
               </tr>
 
               <tr className="border-t hover:bg-gray-50">
-                <td className="p-3">Rizky Pratama</td>
-                <td className="p-3">AGT007</td>
-                <td className="p-3">02 Maret 2026</td>
-                <td className="p-3">13:00</td>
-              </tr>
-
-              <tr className="border-t hover:bg-gray-50">
-                <td className="p-3">Fajar Ramadhan</td>
-                <td className="p-3">AGT009</td>
-                <td className="p-3">02 Maret 2026</td>
-                <td className="p-3">14:00</td>
-              </tr>
-
-              <tr className="border-t hover:bg-gray-50">
-                <td className="p-3">Aulia Putri</td>
-                <td className="p-3">AGT010</td>
-                <td className="p-3">02 Maret 2026</td>
-                <td className="p-3">15:10</td>
+                <td className="p-3">Keysha</td>
+                <td className="p-3">7 Maret 2026</td>
+                <td className="p-3">Master CPNS</td>
+                <td className="p-3 text-red-600 font-medium">Diperpanjang</td>
               </tr>
             </tbody>
 

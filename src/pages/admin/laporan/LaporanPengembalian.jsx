@@ -1,17 +1,17 @@
 import { useState } from "react";
 import Button from "../../../components/ui/Button";
 
-export default function LaporanPeminjamanDanPengembalian() {
+export default function LaporanPengembalian() {
   const [show, setShow] = useState(false);
 
   return (
     <div className="bg-white p-6 rounded-xl">
 
       <h2 className="text-2xl font-semibold mb-6">
-        Laporan Peminjaman & Pengembalian
+        Laporan Pengembalian
       </h2>
 
-      <div className="border rounded-lg p-6 mb-10 relative overflow-visible">
+      <div className="border rounded-lg p-6 mb-10">
 
         <div className="grid grid-cols-3 gap-4">
 
@@ -58,7 +58,7 @@ export default function LaporanPeminjamanDanPengembalian() {
         </div>
 
         <div className="flex justify-end mt-6">
-            <Button onClick={() => setShow(true)}>Tampilkan Data</Button>
+          <Button onClick={() => setShow(true)}>Tampilkan Data</Button>
         </div>
 
       </div>
@@ -69,10 +69,10 @@ export default function LaporanPeminjamanDanPengembalian() {
 
             <thead className="bg-pink-200 text-left">
               <tr>
-                <th className="p-3 w-1/5">Nama</th>
-                <th className="p-3 w-1/4">Tgl Pinjam</th>
-                <th className="p-3 w-1/4">Tgl Kembali</th>
-                <th className="p-3 w-1/4">Buku</th>
+                <th className="p-3">Nama</th>
+                <th className="p-3">Tgl Pinjam</th>
+                <th className="p-3">Tgl Kembali</th>
+                <th className="p-3">Buku</th>
                 <th className="p-3">Status</th>
               </tr>
             </thead>
@@ -89,26 +89,6 @@ export default function LaporanPeminjamanDanPengembalian() {
               </tr>
 
               <tr className="border-t hover:bg-gray-50">
-                <td className="p-3">Dika</td>
-                <td className="p-3">28 Maret 2026</td>
-                <td className="p-3">-</td>
-                <td className="p-3">Tips Skripsi</td>
-                <td className="p-3 text-yellow-600 font-medium">
-                  Dipinjam
-                </td>
-              </tr>
-
-               <tr className="border-t hover:bg-gray-50">
-                <td className="p-3">Keysha</td>
-                <td className="p-3">7 Maret 2026</td>
-                <td className="p-3">-</td>
-                <td className="p-3">Master CPNS</td>
-                <td className="p-3 text-red-600 font-medium">
-                  Diperpanjang
-                </td>
-              </tr>
-
-                 <tr className="border-t hover:bg-gray-50">
                 <td className="p-3">Chelsea</td>
                 <td className="p-3">7 Maret 2026</td>
                 <td className="p-3">10 Maret 2026</td>
