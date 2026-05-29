@@ -69,8 +69,7 @@ export default function Pengembalian() {
       userData.nama.trim() === ""
     ) {
       setPopupData({
-        title: "Peringatan",
-        message: "Nomor dan Nama wajib diisi!",
+        message: "Harap lengkapi data",
         action: "",
       });
 
@@ -92,7 +91,7 @@ export default function Pengembalian() {
         Pengembalian Buku
       </h2>
 
-      {/*  STEP 1 */}
+      {/* STEP 1 */}
       {step === 1 && (
         <div className="flex flex-col items-center justify-center mt-10">
 
@@ -113,7 +112,6 @@ export default function Pengembalian() {
                   name="nomor"
                   value={userData.nomor}
                   onChange={handleChange}
-                  placeholder="Masukkan nomor anggota"
                 />
               </div>
 
@@ -127,7 +125,6 @@ export default function Pengembalian() {
                   name="nama"
                   value={userData.nama}
                   onChange={handleChange}
-                  placeholder="Masukkan nama anggota"
                 />
               </div>
 
@@ -147,7 +144,7 @@ export default function Pengembalian() {
         </div>
       )}
 
-      {/* ================= STEP 2 ================= */}
+      {/* STEP 2 */}
       {step === 2 && (
         <div className="animate-in fade-in duration-300">
 
@@ -164,10 +161,7 @@ export default function Pengembalian() {
                   Nomor :
                 </label>
 
-                <KotakInput
-                  value={userData.nomor}
-                  readOnly
-                />
+                <KotakInput value={userData.nomor} readOnly />
               </div>
 
               <div className="flex items-center gap-5">
@@ -175,10 +169,7 @@ export default function Pengembalian() {
                   Nama :
                 </label>
 
-                <KotakInput
-                  value={userData.nama}
-                  readOnly
-                />
+                <KotakInput value={userData.nama} readOnly />
               </div>
 
             </div>
@@ -192,13 +183,12 @@ export default function Pengembalian() {
 
             <div className="space-y-5">
 
-              {books.slice(0, 3).map((book) => (
+              {books.map((book) => (
                 <div
                   key={book.id}
                   className="bg-gray-100 rounded-lg p-5 flex items-center justify-between"
                 >
 
-                  {/* KIRI */}
                   <div className="flex items-center gap-5">
 
                     <div className="w-24 h-32 overflow-hidden rounded border border-gray-300">
@@ -231,11 +221,12 @@ export default function Pengembalian() {
 
                   </div>
 
-                  {/* BUTTON */}
                   <div>
                     <Button
                       disabled={returnedBooks.includes(book.id)}
                       onClick={() => {
+                        if (returnedBooks.includes(book.id)) return;
+
                         setPopupData({
                           title: "Konfirmasi",
                           message: `Kembalikan buku ${book.judul}?`,
@@ -278,11 +269,8 @@ export default function Pengembalian() {
         </div>
       )}
 
-      {/* ================= POPUP ================= */}
-      <PopUp
-        isOpen={showPopup}
-        onClose={handleClosePopup}
-      >
+      {/* POPUP */}
+      <PopUp isOpen={showPopup} onClose={handleClosePopup}>
 
         <h1 className="text-xl font-bold mb-4 text-center">
           {popupData.title}
@@ -299,7 +287,6 @@ export default function Pengembalian() {
               <Button
                 onClick={() => {
 
-                  // SAVE
                   if (popupData.action === "save") {
 
                     const updatedBooks = [
@@ -309,7 +296,6 @@ export default function Pengembalian() {
 
                     setReturnedBooks(updatedBooks);
 
-                    // CEK APAKAH SEMUA SUDAH DIKEMBALIKAN
                     if (updatedBooks.length === books.length) {
 
                       setPopupData({
@@ -327,16 +313,15 @@ export default function Pengembalian() {
                       });
 
                     }
-                  }
 
-                  // CANCEL
-                  else if (popupData.action === "cancel") {
+                  } else if (popupData.action === "cancel") {
 
                     setPopupData({
                       title: "Dibatalkan",
                       message: "Pengembalian dibatalkan",
-                      action: "",
+                      action: "reset",
                     });
+
                   }
                 }}
               >
@@ -353,16 +338,12 @@ export default function Pengembalian() {
 
                 handleClosePopup();
 
-                // BALIK KE AWAL HANYA JIKA SEMUA BUKU SUDAH DIKEMBALIKAN
-                if (returnedBooks.length === books.length) {
-
+                if (
+                  returnedBooks.length === books.length ||
+                  popupData.action === "reset"
+                ) {
                   setStep(1);
-
-                  setUserData({
-                    nomor: "",
-                    nama: "",
-                  });
-
+                  setUserData({ nomor: "", nama: "" });
                   setReturnedBooks([]);
                 }
               }}
