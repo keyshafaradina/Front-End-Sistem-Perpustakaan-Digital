@@ -42,7 +42,7 @@ export default function Peringatan() {
   };
 
   return (
-    <div className="bg-white p-5 rounded-xl shadow">
+    <div className="bg-white p-5 rounded-xl">
 
       <h2 className="font-semibold mb-4 text-xl">
         Notifikasi Penting

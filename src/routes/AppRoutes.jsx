@@ -9,6 +9,7 @@ import ProtectedRoute from "./ProtectedRoute";
 import Login from "../pages/auth/Login";
 import Register from "../pages/auth/Register";
 import ForgotPassword from "../pages/auth/ForgotPassword";
+
 import ResetPassword from "../pages/auth/ResetPassword";
 
 // admin
@@ -29,6 +30,7 @@ import Dihapus from "../pages/admin/riwayatbuku/Dihapus";
 import Pengembalian from "../pages/admin/Pengembalian";
 import Perpanjangan from "../pages/admin/Perpanjangan";
 import Peminjaman from "../pages/admin/Peminjaman";
+import EditDashboard from "../pages/admin/EditDashboard";
 
 // anggota
 import DashboardAnggota from "../pages/anggota/DashboardAnggota";
@@ -50,6 +52,7 @@ function AppRoutes() {
           <Route path="/" element={<Register />} />
           <Route path="/login" element={<Login />} />
           <Route path="/forgot-password" element={<ForgotPassword />} /> 
+          
           <Route path="/reset-password" element={<ResetPassword />} />
         </Route>
 
@@ -72,7 +75,8 @@ function AppRoutes() {
           <Route path="/diarsipkan" element={<Diarsipkan />} />
           <Route path="/pengembalian" element={<Pengembalian />} />
           <Route path="/perpanjangan" element={<Perpanjangan />} />
-          <Route path="/peminjaman" element={<Peminjaman/>}/>
+          <Route path="/peminjaman" element={<Peminjaman />} />
+          <Route path="/editdashboard" element={<EditDashboard />} />
 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<DashboardAnggota />} />

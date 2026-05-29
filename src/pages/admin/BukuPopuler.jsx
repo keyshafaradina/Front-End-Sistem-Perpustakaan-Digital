@@ -10,7 +10,7 @@ export default function BukuPopuler() {
   ]);
 
   return (
-    <div className="bg-white p-6 rounded-xl shadow">
+    <div className="bg-white p-6 rounded-xl">
 
       <h2 className="text-xl font-semibold mb-4">
         Buku Populer

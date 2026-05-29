@@ -91,7 +91,7 @@ export default function Dashboard() {
       <div className="text-xl bg-white p-5 rounded-2xl">
         <h3 className="font-semibold mb-4">Menu Cepat</h3>
 
-        <div className="grid grid-cols-5 gap-4">
+        <div className="grid grid-cols-6 gap-4">
             <Button onClick={() => navigate("/kelolabuku")} > 📚 Kelola Buku</Button>
     
              <Button onClick={() => navigate("/anggota")} > 👤 Anggota </Button>
@@ -101,6 +101,8 @@ export default function Dashboard() {
              <Button onClick={() => navigate("/pengembalian")} >🔄 Pengembalian</Button>
 
              <Button onClick={() => navigate("/laporan")} >📄 Laporan</Button>
+
+             <Button onClick={() => navigate("/editdashboard")} >⚙️ Edit Dashboard </Button>
 
         </div>
       </div>
