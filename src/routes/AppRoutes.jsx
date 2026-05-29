@@ -29,6 +29,7 @@ import Diarsipkan from "../pages/admin/riwayatbuku/Diarsipkan";
 import Dihapus from "../pages/admin/riwayatbuku/Dihapus";
 import Pengembalian from "../pages/admin/Pengembalian";
 import Perpanjangan from "../pages/admin/Perpanjangan";
+import Peminjaman from "../pages/admin/Peminjaman";
 import EditDashboard from "../pages/admin/EditDashboard";
 
 // anggota
@@ -74,8 +75,8 @@ function AppRoutes() {
           <Route path="/diarsipkan" element={<Diarsipkan />} />
           <Route path="/pengembalian" element={<Pengembalian />} />
           <Route path="/perpanjangan" element={<Perpanjangan />} />
+          <Route path="/peminjaman" element={<Peminjaman />} />
           <Route path="/editdashboard" element={<EditDashboard />} />
-          
 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<DashboardAnggota />} />
