@@ -1,148 +1,281 @@
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import {
+  Camera,
+  Save,
+  X,
+  User,
+  Mail,
+  Briefcase,
+} from "lucide-react";
+
 import Button from "../../components/ui/Button";
-import KotakInput from "../../components/ui/KotakInput";
-import PopUp from "../../components/ui/Popup";
+import { updateProfilAdmin } from "../../services/authService";
 
 function EditProfileAdmin() {
-    const navigate=useNavigate();
+  const navigate = useNavigate();
+  const fileInputRef = useRef(null);
 
-    // state data profile
-    const [profile, setProfile] = useState({
-        nama: "adadeh",
-        email: "adadeh@gmail.com",
-        alamat: "Medan",
-        telepon: "08123456789",
-    });
+  const user = JSON.parse(localStorage.getItem("user") || "{}");
 
-    // popup
-    const [showPopup, setShowPopup] = useState(false);
+  const [nama, setNama] = useState(user.nama_lengkap || user.name || "");
+  const [foto, setFoto] = useState(null);
 
-    // handle perubahan input
-    const handleChange = (e) => {
+  const [previewFoto, setPreviewFoto] = useState(
+    user.foto
+      ? `http://127.0.0.1:8000/uploads/profile/${user.foto}?t=${Date.now()}`
+      : "/images/nailong.jpg"
+  );
 
-        const { name, value } = e.target;
+  const [message, setMessage] = useState("");
+  const [showConfirm, setShowConfirm] = useState(false);
+  const [showFotoModal, setShowFotoModal] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-        setProfile({
-            ...profile,
-            [name]: value,
-        });
-    };
+  const handleFotoChange = (e) => {
+    const file = e.target.files?.[0];
 
-    // tombol simpan
-    const handleSimpan = () => {
+    if (!file) return;
 
-        // popup muncul
-        setShowPopup(true);
+    setFoto(file);
+    setPreviewFoto(URL.createObjectURL(file));
+    setShowFotoModal(false);
+    setMessage("");
+  };
 
-        // nanti backend:
-        // fetch / axios simpan data
-    };
+  const handleSimpan = async () => {
+    if (!nama.trim()) {
+      setMessage("Nama wajib diisi!");
+      setShowConfirm(false);
+      return;
+    }
 
-    // konfirmasi popup
-    const handleSetuju = () => {
+    try {
+      setLoading(true);
 
-        setShowPopup(false);
+      const formData = new FormData();
+      formData.append("nama_lengkap", nama);
 
-        navigate("/profileadmin",{state:profile,})
-    };
+      if (foto instanceof File) {
+        formData.append("foto", foto, foto.name);
+      }
 
-    return (
+      const res = await updateProfilAdmin(user.id, formData);
 
-        <div className="flex flex-col gap-5 mb-5">
+      const updatedUser = {
+        ...user,
+        ...res.data.data,
+      };
 
-            {/* Judul */}
-            <div>
-                <h1 className="font-bold text-4xl px-10 py-4">
-                    Edit Profile
-                </h1>
-            </div>
+      localStorage.setItem("user", JSON.stringify(updatedUser));
+      navigate("/profileadmin");
+    } catch (error) {
+      console.error("EDIT PROFILE ADMIN ERROR:", error.response?.data || error);
 
-            {/* Isi */}
-            <div className="flex flex-col lg:flex-row gap-20 px-20 justify-start">
+      setMessage(
+        error.response?.data?.message ||
+          "Gagal memperbarui profil"
+      );
 
-                {/* Foto */}
+      setShowConfirm(false);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-white via-pink-50 to-white p-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="bg-white rounded-3xl shadow-xl border border-pink-100 p-8">
+          <div className="mb-8">
+            <h1 className="text-4xl font-bold text-gray-800">
+              Edit Profile
+            </h1>
+
+            <p className="text-gray-500 mt-2">
+              Perbarui informasi profil admin
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-[360px_1fr] gap-10">
+            <div className="bg-pink-50 border border-pink-100 rounded-3xl p-6">
+              <div className="relative">
                 <img
-                    src="/images/nailong.jpg"
-                    alt="foto profil"
-                    className="w-50 h-50 lg:w-80 lg:h-96 object-cover"
+                  src={previewFoto}
+                  alt="foto profil"
+                  onClick={() => setShowFotoModal(true)}
+                  onError={(e) => {
+                    e.currentTarget.src = "/images/nailong.jpg";
+                  }}
+                  className="w-full h-[430px] object-cover rounded-3xl shadow-md cursor-pointer"
                 />
 
-                {/* Form */}
-                <div className="font-semibold text-2xl w-full flex flex-col gap-3">
+                <button
+                  type="button"
+                  onClick={() => setShowFotoModal(true)}
+                  className="absolute bottom-4 right-4 bg-pink-500 hover:bg-pink-600 text-white p-3 rounded-full shadow-lg transition"
+                >
+                  <Camera size={22} />
+                </button>
+              </div>
 
-                    <KotakInput
-                        label="Nama"
-                        name="nama"
-                        value={profile.nama}
-                        onChange={handleChange}
-                        direction="column"
-                    />
+              <input
+                ref={fileInputRef}
+                type="file"
+                accept="image/*"
+                onChange={handleFotoChange}
+                className="hidden"
+              />
 
-                    <KotakInput
-                        label="Email"
-                        name="email"
-                        value={profile.email}
-                        onChange={handleChange}
-                        direction="column"
-                    />
+              <p className="text-center text-gray-500 text-sm mt-4">
+                Klik foto untuk mengganti foto profil
+              </p>
+            </div>
 
-                    <KotakInput
-                        label="Alamat"
-                        name="alamat"
-                        value={profile.alamat}
-                        onChange={handleChange}
-                        direction="column"
-                    />
+            <div className="flex flex-col justify-between">
+              <div className="space-y-5">
+                <div className="bg-pink-50 border border-pink-100 rounded-2xl p-5">
+                  <label className="flex items-center gap-3 mb-2 text-gray-600 font-bold">
+                    <User size={20} className="text-pink-500" />
+                    Nama
+                  </label>
 
-                    <KotakInput
-                        label="No. Telepon"
-                        name="telepon"
-                        value={profile.telepon}
-                        onChange={handleChange}
-                        direction="column"
-                    />
-
+                  <input
+                    type="text"
+                    value={nama}
+                    onChange={(e) => setNama(e.target.value)}
+                    className="w-full bg-white border border-pink-100 rounded-xl px-4 py-3 font-bold text-gray-800 focus:outline-none focus:ring-2 focus:ring-pink-300"
+                  />
                 </div>
 
-            </div>
-            <div className="flex justify-end px-20">
+                <div className="bg-pink-50 border border-pink-100 rounded-2xl p-5">
+                  <label className="flex items-center gap-3 mb-2 text-gray-600 font-bold">
+                    <Mail size={20} className="text-pink-500" />
+                    Email
+                  </label>
 
-                <Button onClick={handleSimpan}>
-                    Simpan Perubahan
+                  <input
+                    type="text"
+                    value={user.email || ""}
+                    readOnly
+                    className="w-full bg-gray-50 border border-pink-100 rounded-xl px-4 py-3 font-bold text-gray-500 cursor-not-allowed"
+                  />
+                </div>
+
+                <div className="bg-pink-50 border border-pink-100 rounded-2xl p-5">
+                  <label className="flex items-center gap-3 mb-2 text-gray-600 font-bold">
+                    <Briefcase size={20} className="text-pink-500" />
+                    Jabatan
+                  </label>
+
+                  <input
+                    type="text"
+                    value={user.jabatan || "Pustakawan"}
+                    readOnly
+                    className="w-full bg-gray-50 border border-pink-100 rounded-xl px-4 py-3 font-bold text-gray-500 cursor-not-allowed"
+                  />
+                </div>
+
+                {message && (
+                  <div className="bg-red-50 text-red-500 border border-red-100 rounded-xl px-4 py-3 font-semibold">
+                    {message}
+                  </div>
+                )}
+              </div>
+
+              <div className="flex flex-col sm:flex-row justify-end gap-4 mt-10">
+                <Button
+                  type="button"
+                  onClick={() => navigate("/profileadmin")}
+                  className="flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 text-white"
+                >
+                  <X size={18} />
+                  Batal
                 </Button>
 
+                <Button
+                  type="button"
+                  onClick={() => setShowConfirm(true)}
+                  disabled={loading}
+                  className="flex items-center justify-center gap-2 bg-pink-500 hover:bg-pink-600 text-white"
+                >
+                  <Save size={18} />
+                  {loading ? "Menyimpan..." : "Simpan"}
+                </Button>
+              </div>
             </div>
-            <PopUp isOpen={showPopup}>
-
-                <h2 className="text-2xl font-bold mb-4">
-                    Simpan Perubahan
-                </h2>
-
-                <p className="mb-5">
-                    Apakah kamu yakin ingin menyimpan perubahan profile?
-                </p>
-
-                <div className="flex justify-end gap-3">
-                    <button
-                        onClick={() => setShowPopup(false)}
-                        className="bg-gray-300 hover:bg-gray-400 px-4 py-2 rounded font-semibold"
-                    >
-                        Batal
-                    </button>
-                    <button
-                        onClick={handleSetuju}
-                        className="bg-pink-300 hover:bg-pink-400 px-4 py-2 rounded font-semibold"
-                    >
-                        Ya, Simpan
-                    </button>
-
-                </div>
-
-            </PopUp>
-
+          </div>
         </div>
-    );
+      </div>
+
+      {showFotoModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-3xl shadow-xl border border-pink-100 p-7 w-80 text-center">
+            <div className="w-14 h-14 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4">
+              <Camera className="text-pink-500" size={28} />
+            </div>
+
+            <h2 className="text-xl font-bold text-gray-800 mb-5">
+              Edit Foto Profil
+            </h2>
+
+            <div className="flex flex-col gap-3">
+              <button
+                type="button"
+                onClick={() => fileInputRef.current?.click()}
+                className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-3 rounded-xl font-bold transition"
+              >
+                Pilih Galeri
+              </button>
+
+              <button
+                type="button"
+                onClick={() => setShowFotoModal(false)}
+                className="bg-pink-500 hover:bg-pink-600 text-white px-4 py-3 rounded-xl font-bold transition"
+              >
+                Batal
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showConfirm && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-3xl shadow-xl border border-pink-100 p-7 w-80 text-center">
+            <h2 className="text-xl font-bold text-gray-800 mb-3">
+              Simpan perubahan?
+            </h2>
+
+            <p className="text-gray-500 mb-6">
+              Data profil admin akan diperbarui.
+            </p>
+
+            <div className="flex justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => setShowConfirm(false)}
+                className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-xl font-bold transition"
+              >
+                Tidak
+              </button>
+
+              <button
+                type="button"
+                onClick={() => {
+                  setShowConfirm(false);
+                  handleSimpan();
+                }}
+                className="bg-pink-500 hover:bg-pink-600 text-white px-6 py-2 rounded-xl font-bold transition"
+              >
+                Ya
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
 }
 
 export default EditProfileAdmin;

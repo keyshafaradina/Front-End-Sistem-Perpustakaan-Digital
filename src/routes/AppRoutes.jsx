@@ -13,8 +13,9 @@ import ResetPassword from "../pages/auth/ResetPassword";
 
 // admin
 import DashboardAdmin from "../pages/admin/DashboardAdmin";
+import DashboardSetting from "../pages/admin/DashboardSetting";
 import ProfileAdmin from "../pages/admin/ProfileAdmin";
-import Buku from "../pages/admin/BukuPopuler";
+import BukuPopuler from "../pages/admin/BukuPopuler";
 import Laporan from "../pages/admin/laporan/Laporan";
 import Anggota from "../pages/admin/Anggota";
 import KelolaBuku from "../pages/admin/KelolaBuku";
@@ -40,26 +41,25 @@ import KartuAnggota from "../pages/anggota/KartuAnggota";
 import DaftarBuku from "../pages/anggota/daftarbuku/DaftarBuku";
 import InformasiBuku from "../pages/anggota/daftarbuku/InformasiBuku";
 
-
-
 function AppRoutes() {
   return (
-      <Routes>
-        <Route element={<AuthLayout />}>
-          {/* Halaman Auth lainnya */}
-          <Route path="/" element={<Register />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} /> 
-          <Route path="/reset-password" element={<ResetPassword />} />
-        </Route>
+    <Routes>
+      <Route element={<AuthLayout />}>
+        <Route path="/" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
+      </Route>
 
-        <Route element={<MainLayout />}>
+      <Route element={<MainLayout />}>
         <Route element={<ProtectedRoute />}>
           {/* Halaman Admin */}
           <Route path="/dashboardadmin" element={<DashboardAdmin />} />
+          <Route path="/admin/dashboard-setting" element={<DashboardSetting />} />
           <Route path="/profileadmin" element={<ProfileAdmin />} />
-          <Route path="/buku" element={<Buku />} />
-          <Route path="/laporan" element={<Laporan />} />  
+          <Route path="/buku-populer" element={<BukuPopuler />} />
+          <Route path="/buku" element={<BukuPopuler />} />
+          <Route path="/laporan" element={<Laporan />} />
           <Route path="/anggota" element={<Anggota />} />
           <Route path="/kelolabuku" element={<KelolaBuku />} />
           <Route path="/tambah-buku" element={<TambahBuku />} />
@@ -72,7 +72,7 @@ function AppRoutes() {
           <Route path="/diarsipkan" element={<Diarsipkan />} />
           <Route path="/pengembalian" element={<Pengembalian />} />
           <Route path="/perpanjangan" element={<Perpanjangan />} />
-          <Route path="/peminjaman" element={<Peminjaman/>}/>
+          <Route path="/peminjaman" element={<Peminjaman />} />
 
           {/* Halaman Anggota */}
           <Route path="/dashboardanggota" element={<DashboardAnggota />} />
@@ -83,10 +83,9 @@ function AppRoutes() {
           <Route path="/kartuanggota" element={<KartuAnggota />} />
           <Route path="/daftarbukuanggota" element={<DaftarBuku />} />
           <Route path="/informasibukuanggota" element={<InformasiBuku />} />
-
         </Route>
-        </Route>
-      </Routes>
+      </Route>
+    </Routes>
   );
 }
 

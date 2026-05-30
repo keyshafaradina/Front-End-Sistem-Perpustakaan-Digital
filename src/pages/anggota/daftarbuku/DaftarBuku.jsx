@@ -1,133 +1,130 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import api from "../../../services/api";
 
 export default function DaftarBuku() {
-
-  // state search
   const [search, setSearch] = useState("");
+  const [buku, setBuku] = useState([]);
 
-  // data buku sementara
-  // nanti tinggal ganti dari backend
-  const buku = [
-    {
-      id: 1,
-      title: "PULANG",
-      image: "/images/nailong.jpg",
-    },
+  useEffect(() => {
+    getBuku();
+  }, []);
 
-    {
-      id: 2,
-      title: "IPS TERPADU",
-      image: "/images/nailong.jpg",
-    },
+  const getBuku = async () => {
+    try {
+      const res = await api.get("/buku");
+      setBuku(res.data.data || []);
+    } catch (error) {
+      console.error("Gagal mengambil data buku:", error);
+      setBuku([]);
+    }
+  };
 
-    {
-      id: 3,
-      title: "KAMUS INGGRIS INDONESIA",
-      image: "/images/nailong.jpg",
-    },
+  const getImage = (item) => {
+    const gambar =
+      item.cover ||
+      item.gambar ||
+      item.foto ||
+      item.image ||
+      item.sampul;
 
-    {
-      id: 4,
-      title: "IBU, CARIKAN",
-      image: "/images/nailong.jpg",
-    },
+    if (!gambar) return "/images/nailong.jpg";
 
-    {
-      id: 5,
-      title: "MANAJEMEN STRATEGI",
-      image: "/images/nailong.jpg",
-    },
+    if (gambar.startsWith("http")) return gambar;
 
-    {
-      id: 6,
-      title: "SEJARAH DUNIA YANG DISEMBUNYIKAN",
-      image: "/images/nailong.jpg",
-    },
+    return `http://127.0.0.1:8000/uploads/buku/${gambar}`;
+  };
 
-    {
-      id: 7,
-      title: "BUKU PINTAR RESEP MASAKAN",
-      image: "/images/nailong.jpg",
-    },
+  const getTitle = (item) => {
+    return item.judul || item.title || item.nama_buku || "";
+  };
 
-    {
-      id: 8,
-      title: "PANDUAN MENYUSUN SKRIPSI",
-      image: "/images/nailong.jpg",
-    },
-
-    {
-      id: 9,
-      title: "DIET SEHAT TANPA LAPAR",
-      image: "/images/nailong.jpg",
-    },
-
-    {
-      id: 10,
-      title: "PENDIDIKAN KARAKTER TANPA KEKERASAN",
-      image: "/images/nailong.jpg",
-    },
-
-    {
-      id: 11,
-      title: "LEIDEN",
-      image: "/images/nailong.jpg",
-    },
-  ];
-
-  // filter pencarian
   const filteredBooks = buku.filter((item) =>
-    item.title
-      .toLowerCase()
-      .includes(search.toLowerCase())
+    getTitle(item).toLowerCase().includes(search.toLowerCase())
   );
 
   return (
+    <div className="min-h-screen bg-gradient-to-br from-pink-50 via-rose-50 to-fuchsia-100 px-6 py-8">
+      <div className="max-w-7xl mx-auto">
 
-    <div className="p-4">
+        {/* HEADER */}
+        <div className="text-center mb-8">
+          <p className="text-pink-500 font-semibold tracking-[4px] uppercase">
+            Library Collection
+          </p>
 
-      <div className="mb-8 flex justify-center">
+          <h1 className="text-4xl font-extrabold text-gray-800 mt-2">
+            Daftar Buku
+          </h1>
 
-        <input
-          type="text"
-          placeholder="Cari"
-          value={search}
-          onChange={(e) =>
-            setSearch(e.target.value)
-          }
-          className="w-full max-w-5xl border border-black rounded-lg px-4 py-2 bg-pink-200 focus:outline-none focus:ring-2 focus:ring-pink-400"
-        />
+          <p className="text-gray-500 mt-2">
+            Temukan buku favoritmu dengan mudah
+          </p>
+        </div>
 
-      </div>
+        {/* SEARCH */}
+        <div className="flex justify-center mb-10">
+          <div className="relative w-full max-w-3xl">
+            <span className="absolute left-5 top-1/2 -translate-y-1/2 text-gray-400">
+              🔍
+            </span>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-8">
-
-        {filteredBooks.map((item) => (
-
-          <Link
-          to="/informasibukuanggota"
-          state={item}
-          key={item.id}
-          className="flex flex-col items-center cursor-pointer hover:scale-105 transition"
-          >
-
-            <img
-              src={item.image}
-              alt={item.title}
-              className="w-28 h-40 object-cover shadow-md rounded-md"
+            <input
+              type="text"
+              placeholder="Cari judul buku..."
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+              className="w-full rounded-2xl bg-white px-14 py-4 shadow-lg border border-pink-100 focus:outline-none focus:ring-4 focus:ring-pink-200"
             />
+          </div>
+        </div>
 
-            <h1 className="text-xs font-semibold text-center mt-3">
-              {item.title}
-            </h1>
+        {/* LIST BUKU */}
+        {filteredBooks.length > 0 ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-8 justify-items-center">
+            {filteredBooks.map((item) => (
+              <Link
+                key={item.id}
+                to="/informasibukuanggota"
+                state={item}
+                className="group w-[220px] bg-white rounded-[32px] p-4 shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2"
+              >
+                {/* COVER */}
+                <div className="overflow-hidden rounded-3xl">
+                  <img
+                    src={getImage(item)}
+                    alt={getTitle(item)}
+                    className="w-full h-[280px] object-cover transition duration-300 group-hover:scale-105"
+                  />
+                </div>
 
-          </Link>
+                {/* INFO */}
+                <div className="mt-5 text-center">
+                  <h2 className="text-2xl font-bold text-gray-800 line-clamp-2 min-h-[64px] flex items-center justify-center">
+                    {getTitle(item)}
+                  </h2>
 
-        ))}
+                  <p className="mt-2 text-lg text-gray-400 group-hover:text-pink-500 transition">
+                    Lihat detail
+                  </p>
+                </div>
+              </Link>
+            ))}
+          </div>
+        ) : (
+          <div className="bg-white rounded-3xl shadow-lg p-10 max-w-md mx-auto text-center">
+            <div className="text-6xl mb-4">📚</div>
 
+            <h2 className="text-2xl font-bold text-gray-700">
+              Buku Tidak Ditemukan
+            </h2>
+
+            <p className="text-gray-500 mt-2">
+              Coba gunakan kata kunci yang berbeda.
+            </p>
+          </div>
+        )}
       </div>
-
     </div>
   );
 }
